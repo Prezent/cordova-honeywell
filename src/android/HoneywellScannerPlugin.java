@@ -34,8 +34,12 @@ public class HoneywellScannerPlugin extends CordovaPlugin implements BarcodeRead
             public void onCreated(AidcManager aidcManager) {
                 manager = aidcManager;
                 barcodeReader = manager.createBarcodeReader();
-                if(barcodeReader != null){
+
+                if (barcodeReader != null) {
+                    barcodeReader.setProperty(BarcodeReader.PROPERTY_CODE_39_ENABLED, true);
+                    barcodeReader.setProperty(BarcodeReader.PROPERTY_QR_CODE_ENABLED, true);
                     barcodeReader.addBarcodeListener(HoneywellScannerPlugin.this);
+
                     try {
                         barcodeReader.claim();
                     } catch (ScannerUnavailableException e) {
@@ -48,7 +52,7 @@ public class HoneywellScannerPlugin extends CordovaPlugin implements BarcodeRead
 
     @Override
     public boolean execute(String action, final JSONArray args, final CallbackContext callbackContext) throws JSONException {
-        if(action.equals("listenForScans")){
+        if (action.equals("listenForScans")) {
             this.callbackContext = callbackContext;
             PluginResult result = new PluginResult(PluginResult.Status.NO_RESULT);
             result.setKeepCallback(true);
@@ -59,8 +63,7 @@ public class HoneywellScannerPlugin extends CordovaPlugin implements BarcodeRead
 
     @Override
     public void onBarcodeEvent(BarcodeReadEvent barcodeReadEvent) {
-        if(this.callbackContext!=null)
-        {
+        if (this.callbackContext != null) {
             PluginResult result = new PluginResult(PluginResult.Status.OK, barcodeReadEvent.getBarcodeData());
             result.setKeepCallback(true);
             this.callbackContext.sendPluginResult(result);
@@ -113,8 +116,7 @@ public class HoneywellScannerPlugin extends CordovaPlugin implements BarcodeRead
     }
 
     private void NotifyError(String error){
-        if(this.callbackContext!=null)
-        {
+        if (this.callbackContext != null) {
             PluginResult result = new PluginResult(PluginResult.Status.ERROR, error);
             result.setKeepCallback(true);
             this.callbackContext.sendPluginResult(result);
