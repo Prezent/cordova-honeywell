@@ -16,6 +16,7 @@ import com.honeywell.aidc.BarcodeFailureEvent;
 import com.honeywell.aidc.BarcodeReadEvent;
 import com.honeywell.aidc.BarcodeReader;
 import com.honeywell.aidc.ScannerUnavailableException;
+import com.honeywell.aidc.UnsupportedPropertyException;
 
 public class HoneywellScannerPlugin extends CordovaPlugin implements BarcodeReader.BarcodeListener {
     private static final String TAG = "HoneywellScanner";
@@ -36,8 +37,13 @@ public class HoneywellScannerPlugin extends CordovaPlugin implements BarcodeRead
                 barcodeReader = manager.createBarcodeReader();
 
                 if (barcodeReader != null) {
-                    barcodeReader.setProperty(BarcodeReader.PROPERTY_CODE_39_ENABLED, true);
-                    barcodeReader.setProperty(BarcodeReader.PROPERTY_QR_CODE_ENABLED, true);
+                    try {
+                        barcodeReader.setProperty(BarcodeReader.PROPERTY_CODE_39_ENABLED, true);
+                        barcodeReader.setProperty(BarcodeReader.PROPERTY_QR_CODE_ENABLED, true);
+                    } catch (UnsupportedPropertyException e) {
+                        e.printStackTrace();
+                    }
+
                     barcodeReader.addBarcodeListener(HoneywellScannerPlugin.this);
 
                     try {
