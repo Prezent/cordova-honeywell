@@ -1,0 +1,16 @@
+{
+  "name": "cordova-honeywell",
+  "version": "1.0.0",
+  "description": "Cordova Plugin to receive input from a Honeywell scanners",
+  "main": "www/honeywell.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prezent/cordova-honeywell.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Prezent/cordova-honeywell/issues"
+  },
+  "homepage": "https://github.com/Prezent/cordova-honeywell#readme"
+}
