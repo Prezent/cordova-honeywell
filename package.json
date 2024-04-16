@@ -1,6 +1,6 @@
 {
   "name": "cordova-honeywell",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Cordova Plugin to receive input from a Honeywell scanners",
   "main": "www/honeywell.js",
   "repository": {
